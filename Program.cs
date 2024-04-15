@@ -1,3 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
- 
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB_First_Steps;
+
+Read read = new Read();
+
+read.read(); 
