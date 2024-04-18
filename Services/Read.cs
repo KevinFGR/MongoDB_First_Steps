@@ -1,27 +1,20 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB_First_Steps.Models;
 
-namespace MongoDB_First_Steps;
+namespace MongoDB_First_Steps.Services;
 public class Read
 {
-    // accessing the sample_mfliz database and returning some regisers
-    public void read()
+    // accessing the sample_mflix database and returning some regisers
+        public void read_collection()
     {
-        Connection connection = new Connection(); 
-        IMongoDatabase database = connection.DB_connect("sample_mflix");
+        Connection connection = new Connection("db_test", "db_test_collection"); 
         
-        IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("movies");
-        
-        var query = Builders<BsonDocument>.Filter.Eq("type", "movie");
+        var query = Builders<UserModel>.Filter.Eq("name", "Kevin Felipe");
 
-        var document = collection.Find(query).Limit(10).ToList();
+        UserModel document = connection.Collection.Find(query).First();
 
-
-        foreach (var d in document){
-        Console.WriteLine(d);
-
-        }
-
+        Console.WriteLine(document);
     }
 
 }

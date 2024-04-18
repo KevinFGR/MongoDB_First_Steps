@@ -7,7 +7,7 @@ namespace MongoDB_First_Steps.Models
     {
     [BsonId]
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-    public int Id {get;set;}
+    public string Id {get;set;}
 
     [BsonElement("Name")]
     public string Name { get; set; }
@@ -18,7 +18,8 @@ namespace MongoDB_First_Steps.Models
     [BsonElement("BornDate")]
     public DateTime BornDate { get; set; }
 
-    [BsonElement("Phone")]
-    public int Phone { get; set; }
+    // I know age is not a good var couse its changes through the years. I just want an INT atribute
+    [BsonElement("Age")]
+    public int Age { get; set; }
     }
 }

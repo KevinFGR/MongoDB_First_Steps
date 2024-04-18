@@ -1,7 +1,9 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using MongoDB_First_Steps;
+﻿using MongoDB_First_Steps.Services;
 
-Read read = new Read();
+// For run Read 
+// Read read = new Read();
+// read.read_collection(); 
 
-read.read(); 
+// For run Create
+Create create = new Create();
+await create.createUser();
