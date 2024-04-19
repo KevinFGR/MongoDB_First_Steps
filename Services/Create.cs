@@ -52,16 +52,20 @@ public class Create{
     // If you want to use BsonDocument object type
     public async Task create_Using_BsonDocument(){
         // You have to change the type UserModel to BsonDocument on Connection.cs
-        Connection connection = new Connection("db_test","db_test_collection");
+        try{
+            Connection connection = new Connection("db_test","db_test_collection");
 
-        BsonDocument user1 = new BsonDocument{
-            {"Name" , "Kevin Felipe"},
-            {"Password" , "MyPassword123"},
-            {"BornDate" , new DateTime(2003, 3,22)},
-            {"Age" , 21}
-        };
-        // To complete this method, you have to change the collection
-        // returning type to BsonDocument and uncoment thennext line
-        // await connection.Collection.InsertOneAsync(user1);
+            BsonDocument user1 = new BsonDocument{
+                {"Name" , "Kevin Felipe"},
+                {"Password" , "MyPassword123"},
+                {"BornDate" , new DateTime(2003, 3,22)},
+                {"Age" , 21}
+            };
+            // To complete this method, you have to change the collection
+            // returning type to BsonDocument and uncoment the next line
+            // await connection.Collection.InsertOneAsync(user1);
+        }catch(Exception e){
+            throw new Exception($"Something wrong occurred creating documents. \n {e.Message}");
+        }
     }
 }

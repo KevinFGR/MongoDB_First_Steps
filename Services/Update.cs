@@ -7,27 +7,40 @@ namespace MongoDB_First_Steps.Services;
 public class Update
 {
     public async Task updateDocument(){
-        Connection connection = new Connection("db_test", "db_test_collection");
-        
-        var filter = Builders<UserModel>.Filter.Eq(d => d.Age, 68);
+        try{
+            Connection connection = new Connection("db_test", "db_test_collection");
+            
+            FilterDefinition<UserModel> filter = Builders<UserModel>.Filter.Eq(d => d.Age, 68);
 
-        var document = Builders<UserModel>.Update.Set(d=>d.Password, "An_Old_Guy");
+            UpdateDefinition<UserModel> document = Builders<UserModel>.Update.Set(d=>d.Password, "An_Old_Guy");
 
-        var update = await connection.Collection.UpdateOneAsync(filter, document);
+            UpdateResult update = await connection.Collection.UpdateOneAsync(filter, document);
 
-        Console.WriteLine($" Matched count: {update.MatchedCount},\n Modified count: {update.ModifiedCount} \n Aknowledged: {update.IsAcknowledged}");
+            // The IsAcknowledged return true if the database operation was successfully completed
+            if(update.IsAcknowledged){
+                Console.WriteLine($" Matched count: {update.MatchedCount},\n Modified count: {update.ModifiedCount}");
+            }
+        }catch(Exception e){
+            throw new Exception($"Something wrong occurred updating document. \n {e.Message}");
+        }
     }
 
     public async Task updateManyDocuments(){
-        Connection connection = new Connection("db_test", "db_test_collection");
+        try{
+            Connection connection = new Connection("db_test", "db_test_collection");
 
-        var documents = Builders<UserModel>.Filter.Lt(d=>d.Age, 60);
+            FilterDefinition<UserModel> documents = Builders<UserModel>.Filter.Lt(d=>d.Age, 60);
 
-        // Incrementing 20 years in the Age key
-        var changes = Builders<UserModel>.Update.Inc(d=>d.Age, 20);
+            // Incrementing 20 years in the Age key
+            UpdateDefinition<UserModel> changes = Builders<UserModel>.Update.Inc(d=>d.Age, 20);
 
-        var update = await connection.Collection.UpdateManyAsync(documents, changes);
+            UpdateResult update = await connection.Collection.UpdateManyAsync(documents, changes);
 
-         Console.WriteLine($" Matched count: {update.MatchedCount},\n Modified count: {update.ModifiedCount} \n Aknowledged: {update.IsAcknowledged}");
+            if(update.IsAcknowledged){
+                Console.WriteLine($" Matched count: {update.MatchedCount},\n Modified count: {update.ModifiedCount}");
+            }
+        }catch(Exception e){
+            throw new Exception($"Something wrong occurred updating documents. \n {e.Message}");
+        }
     } 
 }
