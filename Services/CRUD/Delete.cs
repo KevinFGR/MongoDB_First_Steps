@@ -2,12 +2,12 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB_First_Steps.Models;
 
-namespace MongoDB_First_Steps.Services;
+namespace MongoDB_First_Steps.Services.CRUD;
 
 public class Delete{
     public async Task deleteDocument(){
         try{
-            Connection connection = new Connection("db_test", "db_test_collection");
+            Connection connection = new Connection(); 
 
             FilterDefinition<UserModel> documents = Builders<UserModel>.Filter.Eq("_id", new ObjectId("6620a9123b0b7cffb8868e1f"));
 
@@ -22,7 +22,7 @@ public class Delete{
     }
     public async Task deleteManyDocuments(){
         try{
-            Connection connection = new Connection("db_test", "db_test_collection");
+            Connection connection = new Connection(); 
 
             FilterDefinition<UserModel> documents = Builders<UserModel>.Filter.Gt(d =>d.Age, 22);
 

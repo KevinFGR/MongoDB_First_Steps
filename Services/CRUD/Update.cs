@@ -2,13 +2,13 @@ using System.ComponentModel;
 using MongoDB.Driver;
 using MongoDB_First_Steps.Models;
 
-namespace MongoDB_First_Steps.Services;
+namespace MongoDB_First_Steps.Services.CRUD;
 
 public class Update
 {
     public async Task updateDocument(){
         try{
-            Connection connection = new Connection("db_test", "db_test_collection");
+            Connection connection = new Connection(); 
             
             FilterDefinition<UserModel> filter = Builders<UserModel>.Filter.Eq(d => d.Age, 68);
 
@@ -27,7 +27,7 @@ public class Update
 
     public async Task updateManyDocuments(){
         try{
-            Connection connection = new Connection("db_test", "db_test_collection");
+            Connection connection = new Connection(); 
 
             FilterDefinition<UserModel> documents = Builders<UserModel>.Filter.Lt(d=>d.Age, 60);
 

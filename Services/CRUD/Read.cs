@@ -2,13 +2,13 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB_First_Steps.Models;
 
-namespace MongoDB_First_Steps.Services;
+namespace MongoDB_First_Steps.Services.CRUD;
 public class Read
 {
     // accessing the sample_mflix database and returning some regisers
     public async Task readCollection(){
         try{
-            Connection connection = new Connection("db_test", "db_test_collection"); 
+            Connection connection = new Connection();  
 
             // the expression (_=>true) will return all documents in the colllection
             // If you want something more specifically you also can. Example: (d =>d.Name = "Jose") 
@@ -24,7 +24,7 @@ public class Read
     public async Task read_collection_using_mongoBuilder(){
         // Using Mongo Bilder query
         try{
-            Connection connection = new Connection("db_test", "db_test_collection");
+            Connection connection = new Connection(); 
             
             FilterDefinition<UserModel> query = Builders<UserModel>.Filter.Eq("name", "Kevin Felipe");
 

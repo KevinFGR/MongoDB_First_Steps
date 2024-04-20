@@ -1,16 +1,16 @@
 using MongoDB.Bson;
 using MongoDB_First_Steps.Models;
 
-namespace MongoDB_First_Steps.Services;
+namespace MongoDB_First_Steps.Services.CRUD;
 
 public class Create{
     public async Task createUser(){
         try{
-            Connection connection = new Connection("db_test", "db_test_collection");
+            Connection connection = new Connection(); 
 
             UserModel user = new UserModel{
-                Name = "Felipe Kevin",
-                Password = "admin@admin",
+                Name = "Rexona McLaren",
+                Password = "RexMcDonalds",
                 BornDate = new DateTime(1955, 6, 18),
                 Age = 68
             };
@@ -24,20 +24,20 @@ public class Create{
     public async Task createManyUsers(){
         // Use InsertMany to insert more than 1 document in the DataBase
         try{
-            Connection connection = new Connection("db_test", "db_test_collection");
+            Connection connection = new Connection(); 
 
             UserModel[] users = new[]{
                 new UserModel{
-                    Name = "Jhon",
-                    Password = "jhon@",
+                    Name = "Darth Veiderson",
+                    Password = "TamTamTamTonteramTonteram",
                     BornDate = new DateTime(2000, 3, 20),
                     Age = 24
                 },
                 new UserModel{
-                    Name = "Jose",
-                    Password = "JosePass",
-                    BornDate = new DateTime(1996, 10,10),
-                    Age = 27
+                    Name = "Henzo",
+                    Password = "BabyShark24",
+                    BornDate = new DateTime(2000, 3,20),
+                    Age = 24
                 }
             };
             await connection.Collection.InsertManyAsync(users);
@@ -53,11 +53,11 @@ public class Create{
     public async Task create_Using_BsonDocument(){
         // You have to change the type UserModel to BsonDocument on Connection.cs
         try{
-            Connection connection = new Connection("db_test","db_test_collection");
+            Connection connection = new Connection();
 
             BsonDocument user1 = new BsonDocument{
                 {"Name" , "Kevin Felipe"},
-                {"Password" , "MyPassword123"},
+                {"Password" , "MyAdmin123"},
                 {"BornDate" , new DateTime(2003, 3,22)},
                 {"Age" , 21}
             };

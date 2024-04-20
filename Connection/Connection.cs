@@ -13,13 +13,12 @@ public class Connection
 
    // Receive a database name and or +collection name , makes the database connection,
    // fills the this.Database and this.Collection content
-   public Connection(string db_name) {
-      this.connectDb(db_name);
-   }
-   public Connection(string db_name, string collection_name) {
-      this.connectDb(db_name);
+   public Connection() {
+      // Your db name here
+      this.connectDb("db_test");
 
-      this.Collection = this.Database.GetCollection<UserModel>(collection_name);
+      // Your db collection name here
+      this.Collection = this.Database.GetCollection<UserModel>("db_test_collection");
     }
     private async void connectDb(string db_name){
       // DB_settings is a class gitIgnored that contains my connecton string to the Atlas MongoDB
@@ -27,6 +26,7 @@ public class Connection
 
       this.Connection_str = _db_settings.Connection_string();
 
+      // Your connection string here, you also can exlude the two code lines above
       MongoUrl mongoUrl = new MongoUrl(this.Connection_str);
 
       MongoClient mongodb = new MongoClient(mongoUrl);
